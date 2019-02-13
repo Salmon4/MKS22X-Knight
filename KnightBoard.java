@@ -37,8 +37,33 @@ public class KnightBoard{
 	}
 
 	private boolean solveH(int row, int col, int level){
+		if (board[row][col] == 0){				
+			board[row][col] = level;
+		}
+		if (solved()){
+			return true;
+		}
+		if (row > 1 && col > 0){ // up 2 left 1
+			if (solveH(row+2,col-1,level + 1)){
+				return true;
+			}
+			board[row][col] = 0;
+		}
+		
+		
+	}
 
-
+	private boolean solved(){
+		boolean ans = true;
+		for (int r = 0; r < board.length; r++){
+			for (int c = 0; c < board[r].length; c++){
+				if (board[r][c] == 0){
+					ans = false;
+				}
+			}
+		}
+		return ans;
+	}
 
 
 
