@@ -20,10 +20,10 @@ public class KnightBoard{
 				if (board[r][c] == 0){
 					ans += "  ";
 				}
-				if (board[r][c] > 9){
+				else if (board[r][c] > 9){
 					ans += " " + board[r][c];
 				}
-				if (board[r][c] <= 9){
+				else if (board[r][c] <= 9){
 					ans += "  " + board[r][c];
 				}	
 			}
