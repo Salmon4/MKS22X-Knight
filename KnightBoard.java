@@ -48,49 +48,49 @@ public class KnightBoard{
 			if (solveH(row-2,col-1,level + 1)){
 				return true;
 			}
-			board[row][col] = 0;
+			board[row-2][col-1] = 0;
 		}
 		if (row > 1 && col < board[row].length - 1 && board[row-2][col+1] == 0){  // up 2 right 1
 			if (solveH(row-2,col+1,level+1)){
 				return true;
 			}
-			board[row][col] = 0;
+			board[row-2][col+1] = 0;
 		}
 		if (row > 0 && col > 1 && board[row-1][col-2] == 0){ // up 1 left 2
 			if (solveH(row-1,col-2,level+1)){
 				return true;
 			}
-			board[row][col] = 0;		
+			board[row-1][col-2] = 0;		
 		}
 		if (row > 0 && col < board[row].length - 2 && board[row-1][col+2] == 0){ //up 1 right 2
 			if (solveH(row-1,col+2,level+1)){
 				return true;
 			}
-			board[row][col] = 0;
+			board[row-1][col+2] = 0;
 		}
 		if (row < board.length - 1 && col > 1 && board[row+1][col-2] == 0){ // down 1 left 2
 			if (solveH(row + 1, col - 2,level+1)){
 				return true;
 			}
-			board[row][col] = 0;
+			board[row+1][col-2] = 0;
 		}
 		if (row < board.length - 1 && col < board[row].length -2 && board[row + 1][col+2] == 0){ // down 1 right 2	
 			if (solveH(row + 1, col + 2,level+1)){
 				return true;
 			}
-			board[row][col] = 0;
+			board[row+1][col+2] = 0;
 		}
 		if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0){ // down 2 left 1
 			if (solveH(row + 2, col -1, level+1)){
 				return true;
 			}
-			board[row][col] = 0;
+			board[row+2][col-1] = 0;
 		}
 		if (row < board.length - 2 && col < board[row].length - 1 && board[row+2][col+1] == 0){ // down 2 right 1
 			if (solveH(row + 2, col + 1,level +1)){
 				return true;
 			}
-			board[row][col] = 0;
+			board[row+2][col+1] = 0;
 		}
 		return false;
 	}
