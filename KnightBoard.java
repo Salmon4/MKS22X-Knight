@@ -4,7 +4,7 @@ public class KnightBoard{
 		if (startingRows < 0 ||startingCols < 0){
 			throw new IllegalArgumentException("No Negatives");
 		}
-		
+
 		board = new int[startingRows][startingCols];
 		for (int r = 0; r < board.length; r++){
 			for (int c = 0; c < board[r].length; c++){
@@ -25,7 +25,7 @@ public class KnightBoard{
 				}
 				else if (board[r][c] <= 9){
 					ans += "  " + board[r][c];
-				}	
+				}
 			}
 			ans += "\n";
 		}
@@ -37,7 +37,7 @@ public class KnightBoard{
 	}
 
 	private boolean solveH(int row, int col, int level){
-		if (board[row][col] == 0){				
+		if (board[row][col] == 0){
 			board[row][col] = level;
 		}
 		if (solved()){
@@ -60,7 +60,7 @@ public class KnightBoard{
 			if (solveH(row-1,col-2,level+1)){
 				return true;
 			}
-			board[row-1][col-2] = 0;		
+			board[row-1][col-2] = 0;
 		}
 		if (row > 0 && col < board[row].length - 2 && board[row-1][col+2] == 0){ //up 1 right 2
 			if (solveH(row-1,col+2,level+1)){
@@ -74,7 +74,7 @@ public class KnightBoard{
 			}
 			board[row+1][col-2] = 0;
 		}
-		if (row < board.length - 1 && col < board[row].length -2 && board[row + 1][col+2] == 0){ // down 1 right 2	
+		if (row < board.length - 1 && col < board[row].length -2 && board[row + 1][col+2] == 0){ // down 1 right 2
 			if (solveH(row + 1, col + 2,level+1)){
 				return true;
 			}
@@ -108,6 +108,70 @@ public class KnightBoard{
 	}
 
 
+	public int countSolutions(int startingRow, int startingCol){
+		return countSolutionsHelper(startingRow,startingCol,1,0);
+		}
+
+
+ 	public int countSolutionsHelper(int row, int col, int level,int ans){
+		if (board[row][col] == 0){
+			board[row][col] = level;
+		}
+		if (solved()){
+			ans += 1;
+			return ans;
+		}
+		// checks for movement
+		if (row > 1 && col > 0 && board[row-2][col-1] == 0){ // up 2 left 1
+			if (countSolutionsHelper(row-2,col-1,level + 1,ans) > 0){
+				ans = countSolutionsHelper(row-2,col-1,level + 1,ans);
+			}
+			board[row-2][col-1] = 0;
+		}
+		if (row > 1 && col < board[row].length - 1 && board[row-2][col+1] == 0){  // up 2 right 1
+			if (countSolutionsHelper(row-2,col+1,level+1,ans) > 0){
+				ans = countSolutionsHelper(row-2,col+1,level+1,ans);
+			}
+			board[row-2][col+1] = 0;
+		}
+		if (row > 0 && col > 1 && board[row-1][col-2] == 0){ // up 1 left 2
+			if (countSolutionsHelper(row-1,col-2,level+1,ans) > 0){
+				ans = countSolutionsHelper(row-1,col-2,level+1,ans);
+			}
+			board[row-1][col-2] = 0;
+		}
+		if (row > 0 && col < board[row].length - 2 && board[row-1][col+2] == 0){ //up 1 right 2
+			if (countSolutionsHelper(row-1,col+2,level+1,ans) > 0){
+				ans = countSolutionsHelper(row-1,col+2,level+1,ans);
+			}
+			board[row-1][col+2] = 0;
+		}
+		if (row < board.length - 1 && col > 1 && board[row+1][col-2] == 0){ // down 1 left 2
+			if (countSolutionsHelper(row + 1, col - 2,level+1,ans) > 0){
+				ans = countSolutionsHelper(row + 1, col - 2,level+1,ans);
+			}
+			board[row+1][col-2] = 0;
+		}
+		if (row < board.length - 1 && col < board[row].length -2 && board[row + 1][col+2] == 0){ // down 1 right 2
+			if (countSolutionsHelper(row + 1, col + 2,level+1,ans) > 0){
+				ans = countSolutionsHelper(row + 1, col + 2,level+1,ans);
+			}
+			board[row+1][col+2] = 0;
+		}
+		if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0){ // down 2 left 1
+			if (countSolutionsHelper(row + 2, col -1, level+1,ans) > 0){
+				ans = countSolutionsHelper(row + 2, col -1, level+1,ans);
+			}
+			board[row+2][col-1] = 0;
+		}
+		if (row < board.length - 2 && col < board[row].length - 1 && board[row+2][col+1] == 0){ // down 2 right 1
+			if (countSolutionsHelper(row + 2, col + 1,level +1,ans) > 0){
+				ans = countSolutionsHelper(row + 2, col + 1,level +1,ans);
+			}
+			board[row+2][col+1] = 0;
+		}
+		return ans;
+	}
 
 
 
