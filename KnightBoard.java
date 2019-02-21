@@ -1,5 +1,6 @@
 public class KnightBoard{
 	private int[][] board;
+	private int[][] move;
 	public KnightBoard(int startingRows,int startingCols){
 		if (startingRows < 0 ||startingCols < 0){
 			throw new IllegalArgumentException("No Negatives");
@@ -11,8 +12,49 @@ public class KnightBoard{
 				board[r][c] = 0;
 			}
 		}
+
+		move = new int[startingRows][startingCols];
+		int moveNumber = 0;
+		for (int r = 0; r < board.length; r++){
+				for (int c = 0; c < board[r].length; c++){
+					if (r > 1 && c > 0){
+						moveNumber++;
+					}
+					if (r > 1 && c < board[row].length - 1){
+						moveNumber++;
+					}
+					if (r > 0 && c > 1){
+						moveNumber++;
+					}
+					if (r > 0 && c < board[row].length - 2){
+						moveNumber++;
+					}
+					if (r < board.length - 1 && c > 1){
+						moveNumber++;
+					}
+					if (r < board.length - 1 && c < board[row].length -2){
+						moveNumber++;
+					}
+					if (r < board.length - 2 && c > 0){
+						moveNumber++;
+					}
+					if (r < board.length - 2 && c < board[row].length - 1){
+						moveNumber++;
+					}
+					move[r][c] = moveNumber;
+				}
+				moveNumber = 0;
+		}
 	}
 
+	public String toStringOutGoingMoves(){
+		String ans = "";
+		for (int r = 0; r < move.length;r++){
+			for (int c = 0; c < move[r].length;c++){
+				
+			}
+		}
+	}
 	public String toString(){
 		String ans = "";
 		for (int r = 0; r < board.length; r++){
@@ -37,6 +79,7 @@ public class KnightBoard{
 	}
 
 	private boolean solveH(int row, int col, int level){
+		/**
 		if (board[row][col] == 0){
 			board[row][col] = level;
 		}
@@ -93,6 +136,7 @@ public class KnightBoard{
 			board[row+2][col+1] = 0;
 		}
 		return false;
+		**/
 	}
 
 	private boolean solved(){
