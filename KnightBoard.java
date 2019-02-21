@@ -17,28 +17,29 @@ public class KnightBoard{
 		int moveNumber = 0;
 		for (int r = 0; r < board.length; r++){
 				for (int c = 0; c < board[r].length; c++){
+					moveNumber = 0;
 					if (r > 1 && c > 0){
 						moveNumber++;
 					}
-					if (r > 1 && c < board[row].length - 1){
+					if (r > 1 && c < board[r].length - 1){
 						moveNumber++;
 					}
 					if (r > 0 && c > 1){
 						moveNumber++;
 					}
-					if (r > 0 && c < board[row].length - 2){
+					if (r > 0 && c < board[r].length - 2){
 						moveNumber++;
 					}
 					if (r < board.length - 1 && c > 1){
 						moveNumber++;
 					}
-					if (r < board.length - 1 && c < board[row].length -2){
+					if (r < board.length - 1 && c < board[r].length -2){
 						moveNumber++;
 					}
 					if (r < board.length - 2 && c > 0){
 						moveNumber++;
 					}
-					if (r < board.length - 2 && c < board[row].length - 1){
+					if (r < board.length - 2 && c < board[r].length - 1){
 						moveNumber++;
 					}
 					move[r][c] = moveNumber;
@@ -51,9 +52,11 @@ public class KnightBoard{
 		String ans = "";
 		for (int r = 0; r < move.length;r++){
 			for (int c = 0; c < move[r].length;c++){
-				
+				ans += " " + move[r][c];
 			}
+			ans += "\n";
 		}
+		return ans;
 	}
 	public String toString(){
 		String ans = "";
@@ -74,11 +77,11 @@ public class KnightBoard{
 		return ans;
 	}
 
-	public boolean solve(int startingRow, int startingCol){
-		return solveH(startingRow,startingCol, 1);
-	}
+//	public boolean solve(int startingRow, int startingCol){
+//		return solveH(startingRow,startingCol, 1);
+//	}
 
-	private boolean solveH(int row, int col, int level){
+//	private boolean solveH(int row, int col, int level){
 		/**
 		if (board[row][col] == 0){
 			board[row][col] = level;
@@ -137,7 +140,7 @@ public class KnightBoard{
 		}
 		return false;
 		**/
-	}
+//	}
 
 	private boolean solved(){
 		boolean ans = true;
