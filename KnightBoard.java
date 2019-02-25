@@ -146,7 +146,7 @@ public class KnightBoard{
 		boolean ans = true;
 		for (int r = 0; r < board.length; r++){
 			for (int c = 0; c < board[r].length; c++){
-				if (board[r][c] == 0){
+				if (board[r][c] < 1){
 					ans = false;
 				}
 			}
@@ -160,76 +160,76 @@ public class KnightBoard{
 		}
 
 	public int countSolutionsHelper(int row, int col, int level, int ans){
-		//System.out.println(ans);
 		if (solved()){
 			ans += 1;
+			//System.out.println(ans);
 			return ans;
 		}
-		for (int i = 0; i < 8; i++){
-			if (i == 0){
+
 				if (row > 1 && col > 0 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row-2,col-1,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
 
-			if (i == 1){
+
+
 				if (row > 1 && col < board[row].length - 1 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row-2,col+1,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
 
-			if (i == 2){
+
+
 				if (row > 0 && col > 1 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row-1,col-2,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
 
-			if (i == 3){
+
+
 				if (row > 0 && col < board[row].length - 2 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row-1,col+2,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
 
-			if (i == 4){
+
+
 				if (row < board.length - 1 && col > 1 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+1,col-2,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
 
-			if (i == 5){
+
+
 				if (row < board.length - 1 && col < board[row].length -2 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+1,col+2,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
 
-			if (i == 6){
+
+
 				if (row < board.length - 2 && col > 0 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+2,col-1,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
 
-			if (i == 7){
+
+
 				if (row < board.length - 2 && col < board[row].length - 1 && board[row][col] == 0){
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+2,col+1,level+1,ans);
 					board[row][col] = 0;
 				}
-			}
-		}
+
+
+
 		return ans;
 	}
 /**
