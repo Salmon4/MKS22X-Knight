@@ -80,6 +80,16 @@ public class KnightBoard{
 	}
 
 	public boolean solve(int startingRow, int startingCol){
+		for (int r = 0; r < board.length; r++){
+			for (int c = 0; c < board[r].length;c++){
+				if (board[r][c] != 0){
+					throw new IllegalStateException("Board is not clear");
+				}
+			}
+		}
+		if (startingRow < 0 || startingCol < 0 || startingRow > board.length-1 || startingCol > board[startingRow].length - 1){
+			throw new IllegalArgumentException("Out of bounds");
+		}
 		return solveH(startingRow,startingCol, 1);
 	}
 
@@ -157,6 +167,16 @@ public class KnightBoard{
 	}
 
 	public int countSolutions(int startingRow, int startingCol){
+		for (int r = 0; r < board.length; r++){
+			for (int c = 0; c < board[r].length;c++){
+				if (board[r][c] != 0){
+					throw new IllegalStateException("Board is not clear");
+				}
+			}
+		}
+		if (startingRow < 0 || startingCol < 0 || startingRow > board.length-1 || startingCol > board[startingRow].length - 1){
+			throw new IllegalArgumentException("Out of bounds");
+		}
 		return countSolutionsHelper(startingRow,startingCol,1,0);
 		}
 
