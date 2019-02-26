@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
 public class KnightBoard{
 	private int[][] board;
 	private int[][] move;
+	private List<Integer> values = new ArrayList();
+	private int[][] coord;
 	//private boolean justsolved = false;
 	//private int count = 0;
 	public KnightBoard(int startingRows,int startingCols){
@@ -93,6 +98,71 @@ public class KnightBoard{
 		return solveH(startingRow,startingCol, 1);
 	}
 
+	private void fill(int row, int col){
+		values = new ArrayList<>();
+		//fills in the possible move's outgoing moves to later sort
+		if (row > 1 && col > 0 && board[row-2][col-1] == 0){ // up 2 left 1
+			values.add(move[row-2][col-1]);
+		}
+		if (row > 1 && col < board[row].length - 1 && board[row-2][col+1] == 0){  // up 2 right 1
+			values.add(move[row-2][col+1]);
+		}
+		if (row > 0 && col > 1 && board[row-1][col-2] == 0){ // up 1 left 2
+			values.add(move[row-1][col-2]);
+		}
+		if (row > 0 && col < board[row].length - 2 && board[row-1][col+2] == 0){ //up 1 right 2
+			values.add(move[row-1][col+2]);
+		}
+		if (row < board.length - 1 && col > 1 && board[row+1][col-2] == 0){ // down 1 left 2
+			values.add(move[row+1][col-2]);
+		}
+		if (row < board.length - 1 && col < board[row].length -2 && board[row+1][col+2] == 0){ // down 1 right 2
+			values.add(move[row+1][col+2]);
+		}
+		if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0 && board[row+2][col-1] == 0){ // down 2 left 1
+			values.add(move[row+2][col-1]);
+		}
+		if (row < board.length - 2 && col < board[row].length - 1 && board[row+2][col+1] == 0){ // down 2 right 1
+			values.add(move[row+2][col+1]);
+		}
+		//sorting outgoingmoves
+		Collections.sort(values);
+		//-------------------------------------------------------------------------------
+		coord = new int[2][8]; //row 0 is x and row 1 is y
+		int currentIndex = 0;
+		if (row > 1 && col > 0){ // up 2 left 1
+
+		}
+		if (row > 1 && col < board[row].length - 1){  // up 2 right 1
+
+		}
+		if (row > 0 && col > 1){ // up 1 left 2
+
+		}
+		if (row > 0 && col < board[row].length - 2){ //up 1 right 2
+
+		}
+		if (row < board.length - 1 && col > 1){ // down 1 left 2
+
+		}
+		if (row < board.length - 1 && col < board[row].length -2){ // down 1 right 2
+
+		}
+		if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0){ // down 2 left 1
+
+		}
+		if (row < board.length - 2 && col < board[row].length - 1){ // down 2 right 1
+
+		}
+	}
+private boolean solveH(int row, int col, int level){
+	possibleMo
+	if (level == board.length * board[0].length){
+		return true;
+	}
+}
+
+/**
 	private boolean solveH(int row, int col, int level){
 
 		if (board[row][col] == 0){
@@ -154,6 +224,7 @@ public class KnightBoard{
 
 	}
 
+**/
 	private boolean solved(){
 		boolean ans = true;
 		for (int r = 0; r < board.length; r++){
