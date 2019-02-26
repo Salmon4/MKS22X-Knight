@@ -156,20 +156,6 @@ public class KnightBoard{
 		return ans;
 	}
 
-	public boolean last(){
-		int empty = 0;
-		for (int r = 0; r < board.length; r++){
-			for (int c = 0; c < board[r].length;c++){
-				if (board[r][c] == 0){
-					empty++;
-				}
-			}
-		}
-		if (empty == 1){
-			return true;
-		}
-		return false;
-	}
 	public int countSolutions(int startingRow, int startingCol){
 		return countSolutionsHelper(startingRow,startingCol,1,0);
 		}
@@ -186,7 +172,7 @@ public class KnightBoard{
 		}
 		//count++;
 		//justsolved = false;
-				if (row > 1 && col > 0 && board[row][col] == 0 && (board[row-2][col-1] == 0 || last())){ //up 2 left 1
+				if (row > 1 && col > 0 && board[row][col] == 0 && board[row-2][col-1] == 0){ //up 2 left 1
 				//	System.out.println(1);
 				//	System.out.println(solved());
 					board[row][col] = level;
@@ -196,7 +182,7 @@ public class KnightBoard{
 
 
 
-				if (row > 1 && col < board[row].length - 1 && board[row][col] == 0 && (board[row-2][col+1] == 0 || last())){ //up 2 right 1
+				if (row > 1 && col < board[row].length - 1 && board[row][col] == 0 && board[row-2][col+1] == 0){ //up 2 right 1
 				//	System.out.println(2);
 					board[row][col] = level;
 					ans = countSolutionsHelper(row-2,col+1,level+1,ans);
@@ -205,7 +191,7 @@ public class KnightBoard{
 
 
 
-				if (row > 0 && col > 1 && board[row][col] == 0 && (board[row-1][col-2] == 0 || last())){ //left 2 up 1
+				if (row > 0 && col > 1 && board[row][col] == 0 && board[row-1][col-2] == 0){ //left 2 up 1
 				//	System.out.println(3);
 					board[row][col] = level;
 					ans = countSolutionsHelper(row-1,col-2,level+1,ans);
@@ -214,7 +200,7 @@ public class KnightBoard{
 
 
 
-				if (row > 0 && col < board[row].length - 2 && board[row][col] == 0 && (board[row-1][col+2] == 0 || last())){ //right 2 up 1
+				if (row > 0 && col < board[row].length - 2 && board[row][col] == 0 && board[row-1][col+2] == 0){ //right 2 up 1
 				//	System.out.println(4);
 					board[row][col] = level;
 					ans = countSolutionsHelper(row-1,col+2,level+1,ans);
@@ -223,7 +209,7 @@ public class KnightBoard{
 
 
 
-				if (row < board.length - 1 && col > 1 && board[row][col] == 0 && (board[row+1][col-2] == 0 || last())){ //down 1 left 2
+				if (row < board.length - 1 && col > 1 && board[row][col] == 0 && board[row+1][col-2] == 0){ //down 1 left 2
 				//	System.out.println(5);
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+1,col-2,level+1,ans);
@@ -232,7 +218,7 @@ public class KnightBoard{
 
 
 
-				if (row < board.length - 1 && col < board[row].length - 2 && board[row][col] == 0 && (board[row+1][col+2] == 0 || last())){ //down 1 right 2-----
+				if (row < board.length - 1 && col < board[row].length - 2 && board[row][col] == 0 && board[row+1][col+2] == 0 ){ //down 1 right 2-----
 				//	System.out.println(6);
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+1,col+2,level+1,ans);
@@ -241,7 +227,7 @@ public class KnightBoard{
 
 
 
-				if (row < board.length - 2 && col > 0 && board[row][col] == 0 && (board[row+2][col-1] == 0 || last())){ // down 2 left 1
+				if (row < board.length - 2 && col > 0 && board[row][col] == 0 && board[row+2][col-1] == 0 ){ // down 2 left 1
 				//	System.out.println(7);
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+2,col-1,level+1,ans);
@@ -250,7 +236,7 @@ public class KnightBoard{
 
 
 
-				if (row < board.length - 2 && col < board[row].length - 1 && board[row][col] == 0 && (board[row+2][col+1] == 0 || last()) ){ // down 2 right 1
+				if (row < board.length - 2 && col < board[row].length - 1 && board[row][col] == 0 && board[row+2][col+1] == 0 ){ // down 2 right 1
 				//	System.out.println(8);
 					board[row][col] = level;
 					ans = countSolutionsHelper(row+2,col+1,level+1,ans);
