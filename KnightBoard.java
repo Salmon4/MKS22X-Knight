@@ -65,13 +65,13 @@ public class KnightBoard{
 		for (int r = 0; r < board.length; r++){
 			for (int c = 0; c < board[r].length; c++){
 				if (board[r][c] == 0){
-					ans += "_" + " ";
+					ans += "   ";
 				}
 				else if (board[r][c] > 9){
 					ans += "" + board[r][c] + " ";
 				}
 				else if (board[r][c] <= 9){
-					ans += "" + board[r][c] + " ";
+					ans += " " + board[r][c] + " ";
 				}
 			}
 			ans += "\n";
