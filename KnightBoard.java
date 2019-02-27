@@ -128,7 +128,7 @@ public class KnightBoard{
 			updateBoard(row,col,1);
 		}
 	}
-
+//yay
 	public boolean solve(int startingRow, int startingCol){
 		for (int r = 0; r < board.length; r++){
 			for (int c = 0; c < board[r].length;c++){
