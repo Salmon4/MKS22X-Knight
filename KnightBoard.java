@@ -65,6 +65,7 @@ public class KnightBoard{
 		}
 		return ans;
 	}
+
 	public String toString(){
 		String ans = "";
 		for (int r = 0; r < board.length; r++){
@@ -84,6 +85,50 @@ public class KnightBoard{
 		return ans;
 	}
 
+	private void updateBoard(int row, int col,int amount){
+		if (row > 1 && col > 0){// && board[row-2][col-1] == 0){ // up 2 left 1
+			move[row-2][col-1] += amount;
+		}
+		if (row > 1 && col < board[row].length - 1){// && board[row-2][col+1] == 0){  // up 2 right 1
+			move[row-2][col+1] += amount;
+		}
+		if (row > 0 && col > 1 ){//&& board[row-1][col-2] == 0){ // up 1 left 2
+			move[row-1][col-2] += amount;
+		}
+		if (row > 0 && col < board[row].length - 2){// && board[row-1][col+2] == 0){ //up 1 right 2
+			move[row-1][col+2] += amount;
+		}
+		if (row < board.length - 1 && col > 1){// && board[row+1][col-2] == 0){ // down 1 left 2
+			move[row+1][col-2] += amount;
+		}
+		if (row < board.length - 1 && col < board[row].length -2){// && board[row+1][col+2] == 0){ // down 1 right 2
+			move[row+1][col+2] += amount;
+		}
+		if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0 ){//&& board[row+2][col-1] == 0){ // down 2 left 1
+			move[row+2][col-1] += amount;
+		}
+		if (row < board.length - 2 && col < board[row].length - 1){// && board[row+2][col+1] == 0){ // down 2 right 1
+			move[row+2][col+1] += amount;
+		}
+		//System.out.println("YES");
+		//System.out.println(toStringOutGoingMoves());
+	}
+	public void addKnight(int row,int col,int level){
+		if (board[row][col] == 0){
+			//System.out.println("YES");
+			board[row][col] = level;
+			updateBoard(row,col,-1);
+		}
+
+	}
+
+	public void removeKnight(int row, int col, int level){
+		if (board[row][col] != 0){
+			board[row][col] = 0;
+			updateBoard(row,col,1);
+		}
+	}
+
 	public boolean solve(int startingRow, int startingCol){
 		for (int r = 0; r < board.length; r++){
 			for (int c = 0; c < board[r].length;c++){
@@ -98,7 +143,7 @@ public class KnightBoard{
 		return solveH(startingRow,startingCol, 1);
 	}
 
-	private void fill(int row, int col){
+	public void fill(int row, int col){
 		values = new ArrayList<>();
 		//fills in the possible move's outgoing moves to later sort
 		if (row > 1 && col > 0 && board[row-2][col-1] == 0){ // up 2 left 1
@@ -129,39 +174,102 @@ public class KnightBoard{
 		Collections.sort(values);
 		//-------------------------------------------------------------------------------
 		coord = new int[2][8]; //row 0 is x and row 1 is y
-		int currentIndex = 0;
-		if (row > 1 && col > 0){ // up 2 left 1
-
+		//int currentIndex = 0;
+		int index;
+		if (row > 1 && col > 0 && board[row-2][col-1] == 0){ // up 2 left 1
+			index = values.indexOf(move[row-2][col-1]);
+			coord[0][index] = row - 2;
+			coord[1][index] = col - 1;
 		}
-		if (row > 1 && col < board[row].length - 1){  // up 2 right 1
-
+		if (row > 1 && col < board[row].length - 1 && board[row-2][col+1] == 0){  // up 2 right 1
+			index = values.indexOf(move[row-2][col+1]);
+			coord[0][index] = row - 2;
+			coord[1][index] = col + 1;
 		}
-		if (row > 0 && col > 1){ // up 1 left 2
-
+		if (row > 0 && col > 1 && board[row-1][col-2] == 0){ // up 1 left 2
+			index = values.indexOf(move[row-1][col-2]);
+			coord[0][index] = row - 1;
+			coord[1][index] = col - 2;
 		}
-		if (row > 0 && col < board[row].length - 2){ //up 1 right 2
-
+		if (row > 0 && col < board[row].length - 2 && board[row-1][col+2] == 0){ //up 1 right 2
+			index = values.indexOf(move[row-1][col+2]);
+			coord[0][index] = row - 1;
+			coord[1][index] = col + 2;
 		}
-		if (row < board.length - 1 && col > 1){ // down 1 left 2
-
+		if (row < board.length - 1 && col > 1  && board[row+1][col-2] == 0){ // down 1 left 2
+			index = values.indexOf(move[row+1][col-2]);
+			coord[0][index] = row + 1;
+			coord[1][index] = col - 2;
 		}
-		if (row < board.length - 1 && col < board[row].length -2){ // down 1 right 2
-
+		if (row < board.length - 1 && col < board[row].length -2 && board[row+1][col+2] == 0){ // down 1 right 2
+			index = values.indexOf(move[row+1][col+2]);
+			coord[0][index] = row + 1;
+			coord[1][index] = col + 2;
 		}
-		if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0){ // down 2 left 1
-
+		if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0 && board[row+2][col-1] == 0){ // down 2 left 1
+			index = values.indexOf(move[row+2][col-1]);
+			coord[0][index] = row + 2;
+			coord[1][index] = col - 1;
 		}
-		if (row < board.length - 2 && col < board[row].length - 1){ // down 2 right 1
-
+		if (row < board.length - 2 && col < board[row].length - 1 && board[row+2][col+1] == 0 && board[row+2][col+1] == 0){ // down 2 right 1
+			index = values.indexOf(move[row+2][col+1]);
+			coord[0][index] = row + 2;
+			coord[1][index] = col + 1;
 		}
 	}
+
+
 private boolean solveH(int row, int col, int level){
-	possibleMo
+	//possibleMo
 	if (level == board.length * board[0].length){
 		return true;
 	}
+	//boolean starting = true;
+	//System.out.println(values.size() + "");
+	for (int i = 0; i < numberOfMoves(row,col) ;  i++){
+		//starting = false;
+		//System.out.println("YES");
+		if (board[row][col] == 0){
+			//System.out.println("YES");
+			addKnight(row,col,level);
+			fill(row,col);
+			if (solveH(coord[0][i],coord[1][i],level+1)){
+				return true;
+			}
+			removeKnight(row,col,level);
+		}
+	}
+	return false;
 }
 
+private int numberOfMoves(int row, int col){
+	int ans = 0;
+	if (row > 1 && col > 0 && board[row-2][col-1] == 0){// && board[row-2][col-1] == 0){ // up 2 left 1
+		ans++;
+	}
+	if (row > 1 && col < board[row].length - 1 && board[row-2][col+1] == 0){// && board[row-2][col+1] == 0){  // up 2 right 1
+		ans++;
+	}
+	if (row > 0 && col > 1 && board[row-1][col-2] == 0){ // up 1 left 2
+		ans++;
+	}
+	if (row > 0 && col < board[row].length - 2 && board[row-1][col+2] == 0){ //up 1 right 2
+		ans++;
+	}
+	if (row < board.length - 1 && col > 1 && board[row+1][col-2] == 0){ // down 1 left 2
+		ans++;
+	}
+	if (row < board.length - 1 && col < board[row].length -2 && board[row+1][col+2] == 0){ // down 1 right 2
+		ans++;
+	}
+	if (row < board.length - 2 && col > 0 && board[row + 2][col-1] == 0 && board[row+2][col-1] == 0){ // down 2 left 1
+		ans++;
+	}
+	if (row < board.length - 2 && col < board[row].length - 1 && board[row+2][col+1] == 0){ // down 2 right 1
+		ans++;
+	}
+	return ans;
+}
 /**
 	private boolean solveH(int row, int col, int level){
 
