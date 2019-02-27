@@ -353,7 +353,7 @@ private int numberOfMoves(int row, int col){
 				}
 			}
 		}
-		if (startingRow < 0 || startingCol < 0 || startingRow > board.length-1 || startingCol > board[startingRow].length - 1){
+		if (startingRow < 0 || startingCol < 0 || startingRow > board.length-1 || startingCol > board[0].length - 1){
 			throw new IllegalArgumentException("Out of bounds");
 		}
 		return countSolutionsHelper(startingRow,startingCol,1,0);

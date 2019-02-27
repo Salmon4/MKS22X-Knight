@@ -1,4 +1,32 @@
 public class Driver{
+	//testcase must be a valid index of your input/output array
+public static void runTest(int i){
+
+  KnightBoard b;
+  int[]m =   {4,5,5,5,5};
+  int[]n =   {4,5,4,5,5};
+  int[]startx = {0,0,0,1,2};
+  int[]starty = {0,0,0,1,2};
+  int[]answers = {0,304,32,56,64};
+  if(i >= 0 ){
+    try{
+      int correct = answers[i];
+      b = new KnightBoard(m[i%m.length],n[i%m.length]);
+
+      int ans  = b.countSolutions(startx[i],starty[i]);
+
+      if(correct==ans){
+        System.out.println("PASS board size: "+m[i%m.length]+"x"+n[i%m.length]+" "+ans);
+      }else{
+        System.out.println("FAIL board size: "+m[i%m.length]+"x"+n[i%m.length]+" "+ans+" vs "+correct);
+      }
+    }catch(Exception e){
+      e.printStackTrace();//"FAIL Exception case: "+i);
+
+    }
+  }
+}
+
 	public static void main(String[] args){
 
 		KnightBoard board1 = new KnightBoard(1,1);
@@ -9,9 +37,9 @@ public class Driver{
 		KnightBoard board6 = new KnightBoard(6,6);
 		KnightBoard board7 = new KnightBoard(7,7);
 		KnightBoard board8 = new KnightBoard(8,8);
-		KnightBoard board9 = new KnightBoard(83,83);
+		KnightBoard board9 = new KnightBoard(37,37);
 		//System.out.println(board4.toString());
-
+/**
 		System.out.println(board1.solve(0,0));
 		//System.out.println
 
@@ -23,6 +51,9 @@ public class Driver{
 		System.out.println(board7.solve(0,0));
 		System.out.println(board8.solve(0,0));
 		System.out.println(board9.solve(0,0));
+**/
+//	System.out.println(board5.countSolutions(2,2));
+		runTest(4);
 		//System.out.println(board4.toString());
 		//System.out.println(board5.countSolutions(0,0));
 		//System.out.println(board5.toString());
